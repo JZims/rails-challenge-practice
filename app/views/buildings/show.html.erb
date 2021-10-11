@@ -1,0 +1,10 @@
+<h2>Details for <%= @building.name %> </h2>
+
+
+<h4>Companies Occupying the Building: </h4>
+<ul>
+<% @building.companies_with_offices.each do |c| %>
+    <li> <%= c.name %> </li>
+    <% end %>
+</ul>
+<h4> Total monthly income: $<%= @building.total_rent_income %></h4>

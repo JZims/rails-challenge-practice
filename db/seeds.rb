@@ -1,18 +1,23 @@
+Building.destroy_all
+Office.destroy_all
+Company.destroy_all
+Employee.destroy_all
+
 weworks = [
-  {name: "Finsbury Pavement", 
-   country: "UK", 
+  {name: "Finsbury Pavement",
+   country: "UK",
    address: "131 Finsbury Pavement",
    rent_per_floor: 18000,
    number_of_floors: 8
-  }, 
-  {name: "Chelsea HQ", 
-   country: "US", 
+  },
+  {name: "Chelsea HQ",
+   country: "US",
    address: "29 West 28th Street",
    rent_per_floor: 20000,
    number_of_floors: 20
-  }, 
-  {name: "Broadway", 
-   country: "US", 
+  },
+  {name: "Broadway",
+   country: "US",
    address: "85 Broadway",
    rent_per_floor: 25000,
    number_of_floors: 6
@@ -20,7 +25,8 @@ weworks = [
 ]
 
 weworks.each do |we|
-  Building.create(we)
+  # ActiveRecord Model.create! will error out if the creation fails. This will give us some feedback if `rails db:seed` does not work
+  Building.create!(we)
 end
 
 companies = [
@@ -34,7 +40,7 @@ companies = [
 ]
 
 companies.each do |company|
-  Company.create(name: company)
+  Company.create!(name: company)
 end
 
 titles = [
@@ -47,20 +53,16 @@ titles = [
   "Instructor"
 ]
 
-100.times do 
-  Employee.create(
+100.times do
+  Employee.create!(
     name: Faker::Name.name_with_middle,
     title: titles.sample,
     company: Company.all.sample
   )
 end
 
-10.times do 
-  random_building = Building.all.sample
-  random_building_floors_array = (1..random_building.number_of_floors).to_a
-  Office.create(
-    company: Company.all.sample,
-    building: random_building,
-    floor: random_building_floors_array.delete(random_building_floors_array.sample)
-  )
-end
+microsoft_uk = Office.create!({
+  building: Building.find_by(name: "Finsbury Pavement"),
+  company: Company.find_by(name: "Microsoft"),
+  floor: 3
+  })

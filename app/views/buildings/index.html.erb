@@ -1,0 +1,17 @@
+<h2> All Buildings: </h2>
+
+<ol>
+    <% @buildings.all.each do |building| %>
+        <l1> <%= building.name %>
+            <ul> 
+                <li> Country: <%= building.country %> </li>
+                <li> Address: <%= building.address %> </li>
+                <li> Rent: $<%= building.rent_per_floor %> </li>
+                <li> Floors available: <% building.number_of_floors_available.each do |number| %> 
+                    <%= number %>
+                    <% end %> 
+                </li>
+            </ul>
+        </li>
+        <% end %>
+</ol>

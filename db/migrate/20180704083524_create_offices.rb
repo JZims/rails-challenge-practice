@@ -1,8 +1,9 @@
 class CreateOffices < ActiveRecord::Migration[5.1]
   def change
     create_table :offices do |t|
-
-      t.timestamps
+      t.references :building, foreign_key: true
+      t.references :company, foreign_key: true
+      t.integer :floor
     end
   end
 end
