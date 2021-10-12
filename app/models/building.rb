@@ -1,6 +1,6 @@
 class Building < ApplicationRecord
 
-  has_many :offices
+  has_many :offices, :dependent => :delete_all
   has_many :companies, through: :offices
 
   def total_rent_income 

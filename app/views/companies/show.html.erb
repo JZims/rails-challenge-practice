@@ -1,0 +1,25 @@
+<h2> <%= @company[:name] %>'s Page </h2>
+<h4> Offices Located In: </h4>
+<ul>
+    <% @company.office_info.each do |datum| %>
+        <li><%= datum %> </li>
+        <% end %>
+</ul>
+
+<%= form_for @employee do |f| %>
+    <h4>Add New Employee </h4>
+    <%= f.label 'Employee Name' %>
+    <%= f.text_field :name %>
+    <%= f.label 'Employee Title'%>
+    <%= f.text_field :title %>
+    <%= f.hidden_field :company_id, value: @company.id %>
+    <%= f.submit %>
+    
+<% end %>
+
+<h4> <%= @company[:name] %>'s Employees : </h4>
+<ol>
+    <% @company.employee_list.each do |employee| %>
+        <li> <%= employee %> </li>
+    <% end %>
+</ol>
